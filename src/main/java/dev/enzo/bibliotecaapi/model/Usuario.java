@@ -20,6 +20,6 @@ public class Usuario {
     private String nome;
     private String email;
 
-    @OneToMany(mappedBy = "usuarios")
+    @OneToMany(mappedBy = "usuario")
     private List<Emprestimo> emprestimos;
 }
