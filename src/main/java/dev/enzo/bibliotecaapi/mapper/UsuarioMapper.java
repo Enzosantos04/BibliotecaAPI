@@ -20,7 +20,7 @@ public class UsuarioMapper {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setId(usuarioModel.getId());
         usuarioDTO.setNome(usuarioModel.getNome());
-        usuarioModel.setEmail(usuarioModel.getEmail());
+        usuarioDTO.setEmail(usuarioModel.getEmail());
         return usuarioDTO;
     }
 
