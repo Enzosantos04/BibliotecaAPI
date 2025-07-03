@@ -11,6 +11,9 @@ public class EmprestimoMapper {
         emprestimoModel.setId(emprestimoDTO.getId());
         emprestimoModel.setDataEmprestimo(emprestimoDTO.getDataEmprestimo());
         emprestimoModel.setDataDevolucao(emprestimoDTO.getDataDevolucao());
+        emprestimoModel.setDataDevolucaoReal(emprestimoDTO.getDataDevolucaoReal());
+        emprestimoModel.setUsuario(emprestimoDTO.getUsuarioId());
+        emprestimoModel.setLivro(emprestimoDTO.getLivroId());
         return emprestimoModel;
     }
 
@@ -19,6 +22,9 @@ public class EmprestimoMapper {
         emprestimoDTO.setId(emprestimoModel.getId());
         emprestimoDTO.setDataEmprestimo(emprestimoModel.getDataEmprestimo());
         emprestimoDTO.setDataDevolucao(emprestimoModel.getDataDevolucao());
+        emprestimoDTO.setDataDevolucaoReal(emprestimoModel.getDataDevolucaoReal());
+        emprestimoDTO.setLivroId(emprestimoModel.getLivro());
+        emprestimoDTO.setUsuarioId(emprestimoModel.getUsuario());
         return emprestimoDTO;
     }
 }
