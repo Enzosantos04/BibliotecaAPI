@@ -1,6 +1,7 @@
 package dev.enzo.bibliotecaapi.service;
 
 import dev.enzo.bibliotecaapi.dto.EmprestimoDTO;
+import dev.enzo.bibliotecaapi.dto.LivroDTO;
 import dev.enzo.bibliotecaapi.dto.UsuarioDTO;
 import dev.enzo.bibliotecaapi.mapper.EmprestimoMapper;
 import dev.enzo.bibliotecaapi.model.Emprestimo;
@@ -49,6 +50,8 @@ public class EmprestimoService {
         Emprestimo emprestimo = emprestimoMapper.map(dto);
         emprestimo.setUsuario(usuario);
         emprestimo.setLivro(livro);
+        emprestimo.setDataEmprestimo(LocalDate.now());
+        emprestimo.setDataDevolucao(LocalDate.now().plusMonths(1));
 
         emprestimo = emprestimoRepository.save(emprestimo);
         return emprestimoMapper.map(emprestimo);
@@ -64,5 +67,14 @@ public class EmprestimoService {
         return emprestimoMapper.map(emprestimo);
 
 
+    }
+
+    public void deletarEmprestimo(Long id){
+        emprestimoRepository.deleteById(id);
+    }
+
+    public EmprestimoDTO listarEmprestimoPorId(Long id){
+        Optional<Emprestimo> emprestimoPorId = emprestimoRepository.findById(id);
+        return emprestimoPorId.map(emprestimoMapper::map).orElse(null);
     }
 }
