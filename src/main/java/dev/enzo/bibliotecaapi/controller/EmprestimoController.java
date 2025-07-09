@@ -45,6 +45,18 @@ public class EmprestimoController {
           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Emprestimo de id " + id + " nao encontrado");
         }
     }
+
+    @GetMapping("/listar/{id}")
+    public ResponseEntity<?> listarEmprestimoPorId(@PathVariable Long id){
+            EmprestimoDTO emprestimoDTO = emprestimoService.listarEmprestimoPorId(id);
+        if(emprestimoService.listarEmprestimoPorId(id) != null){
+            return ResponseEntity.ok("Data Emprestimo: " + emprestimoDTO.getDataEmprestimo() + " Livro id: " +
+                    emprestimoDTO.getLivroId() + " Usuario Id: " + emprestimoDTO.getUsuarioId() + " Data de Devolucao: " +
+                    emprestimoDTO.getDataDevolucao());
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Emprestimo de id " + id + " nao encontrado");
+        }
+    }
 }
 
 
