@@ -6,25 +6,26 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class EmprestimoMapper {
-    public Emprestimo map(EmprestimoDTO emprestimoDTO){
-        Emprestimo emprestimoModel = new Emprestimo();
-        emprestimoModel.setId(emprestimoDTO.getId());
-        emprestimoModel.setDataEmprestimo(emprestimoDTO.getDataEmprestimo());
-        emprestimoModel.setDataDevolucao(emprestimoDTO.getDataDevolucao());
-        emprestimoModel.setDataDevolucaoReal(emprestimoDTO.getDataDevolucaoReal());
-        emprestimoModel.setUsuario(emprestimoDTO.getUsuarioId());
-        emprestimoModel.setLivro(emprestimoDTO.getLivroId());
-        return emprestimoModel;
+
+
+
+
+    public EmprestimoDTO map(Emprestimo emprestimo) {
+        EmprestimoDTO dto = new EmprestimoDTO();
+        dto.setId(emprestimo.getId());
+        dto.setUsuarioId(emprestimo.getUsuario().getId());
+        dto.setLivroId(emprestimo.getLivro().getId());
+        dto.setDataEmprestimo(emprestimo.getDataEmprestimo());
+        dto.setDataDevolucaoReal(emprestimo.getDataDevolucaoReal());
+        return dto;
     }
 
-    public EmprestimoDTO map(Emprestimo emprestimoModel){
-        EmprestimoDTO emprestimoDTO = new EmprestimoDTO();
-        emprestimoDTO.setId(emprestimoModel.getId());
-        emprestimoDTO.setDataEmprestimo(emprestimoModel.getDataEmprestimo());
-        emprestimoDTO.setDataDevolucao(emprestimoModel.getDataDevolucao());
-        emprestimoDTO.setDataDevolucaoReal(emprestimoModel.getDataDevolucaoReal());
-        emprestimoDTO.setLivroId(emprestimoModel.getLivro());
-        emprestimoDTO.setUsuarioId(emprestimoModel.getUsuario());
-        return emprestimoDTO;
+
+    public Emprestimo map(EmprestimoDTO dto) {
+        Emprestimo emprestimo = new Emprestimo();
+        emprestimo.setId(dto.getId());
+        emprestimo.setDataEmprestimo(dto.getDataEmprestimo());
+        emprestimo.setDataDevolucaoReal(dto.getDataDevolucaoReal());
+        return emprestimo;
     }
 }
