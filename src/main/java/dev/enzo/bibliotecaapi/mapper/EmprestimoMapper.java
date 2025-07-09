@@ -16,6 +16,7 @@ public class EmprestimoMapper {
         dto.setUsuarioId(emprestimo.getUsuario().getId());
         dto.setLivroId(emprestimo.getLivro().getId());
         dto.setDataEmprestimo(emprestimo.getDataEmprestimo());
+        dto.setDataDevolucao(emprestimo.getDataDevolucao());
         dto.setDataDevolucaoReal(emprestimo.getDataDevolucaoReal());
         return dto;
     }
@@ -25,6 +26,7 @@ public class EmprestimoMapper {
         Emprestimo emprestimo = new Emprestimo();
         emprestimo.setId(dto.getId());
         emprestimo.setDataEmprestimo(dto.getDataEmprestimo());
+        emprestimo.setDataDevolucao(dto.getDataDevolucao());
         emprestimo.setDataDevolucaoReal(dto.getDataDevolucaoReal());
         return emprestimo;
     }
