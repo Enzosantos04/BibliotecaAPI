@@ -4,8 +4,10 @@ import dev.enzo.bibliotecaapi.dto.EmprestimoDTO;
 import dev.enzo.bibliotecaapi.dto.UsuarioDTO;
 import dev.enzo.bibliotecaapi.mapper.EmprestimoMapper;
 import dev.enzo.bibliotecaapi.model.Emprestimo;
+import dev.enzo.bibliotecaapi.model.Livro;
 import dev.enzo.bibliotecaapi.model.Usuario;
 import dev.enzo.bibliotecaapi.repository.EmprestimoRepository;
+import dev.enzo.bibliotecaapi.repository.LivroRepository;
 import dev.enzo.bibliotecaapi.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +22,15 @@ public class EmprestimoService {
     private EmprestimoRepository emprestimoRepository;
     private EmprestimoMapper emprestimoMapper;
     private UsuarioRepository usuarioRepository;
+    private LivroRepository livroRepository;;
 
 
-    public EmprestimoService(EmprestimoRepository emprestimoRepository, EmprestimoMapper emprestimoMapper) {
+    public EmprestimoService(EmprestimoRepository emprestimoRepository, EmprestimoMapper emprestimoMapper, UsuarioRepository usuarioRepository, LivroRepository livroRepository) {
         this.emprestimoRepository = emprestimoRepository;
         this.emprestimoMapper = emprestimoMapper;
+        this.usuarioRepository = usuarioRepository;
+        this.livroRepository = livroRepository;
     }
-
 
     public List<EmprestimoDTO> listarEmprestimos(){
         List<Emprestimo> emprestimos = emprestimoRepository.findAll();
@@ -35,14 +39,19 @@ public class EmprestimoService {
                 .collect(Collectors.toList());
     }
 
-    public EmprestimoDTO criarEmprestimo(EmprestimoDTO dto){
-    Usuario usuario = usuarioRepository.findById(dto.getUsuarioId().getId())
-             .orElseThrow(() -> new RuntimeException("usuario nao encontrado"));
-     Emprestimo emprestimo = emprestimoMapper.map(dto);
-     emprestimo.setUsuario(usuario);
-     emprestimo = emprestimoRepository.save(emprestimo);
-     return emprestimoMapper.map(emprestimo);
+    public EmprestimoDTO criarEmprestimo(EmprestimoDTO dto) {
+        Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
+        Livro livro = livroRepository.findById(dto.getLivroId())
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+
+        Emprestimo emprestimo = emprestimoMapper.map(dto);
+        emprestimo.setUsuario(usuario);
+        emprestimo.setLivro(livro);
+
+        emprestimo = emprestimoRepository.save(emprestimo);
+        return emprestimoMapper.map(emprestimo);
     }
 
     public EmprestimoDTO devolverEmprestimo(Long id){
