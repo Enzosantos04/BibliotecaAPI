@@ -13,8 +13,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class EmprestimoDTO {
     private Long id;
-    private Usuario usuarioId;
-    private Livro livroId;
+    private Long usuarioId;
+    private Long livroId;
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
     private LocalDate dataDevolucaoReal;
